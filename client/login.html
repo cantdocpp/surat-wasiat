@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <form>
+       Name:<br>
+       <input type="text" name="name" v-model='name'><br>
+       email:<br>
+       <input type="text" name="email" v-model="email">
+       <br><br>
+       <input type="submit" value="Submit" @click="requestToken">
+      </form>
+    </div>
+
+    <script type="text/javascript">
+      var app = new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello Vue!',
+          name: '',
+          email: ''
+        },
+        methods: {
+          requestToken: function() {
+            var formData = new FormData(); // Currently empty
+            formData.append('name', this.name);
+            formData.append('email', this.email);
+            axios.post('35.198.212.156/request-token', formData)
+            .then(function(response) {
+              console.log('response', response);
+            })
+            .catch(function(error) {
+              console.log('err', error);
+            })
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
